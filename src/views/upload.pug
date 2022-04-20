@@ -1,0 +1,14 @@
+extends base
+
+block content 
+    if errorMessage
+        h3=errorMessage
+    form(method="post", enctype="multipart/form-data") 
+        label(for="video") Video File
+        input(type="file", name="video", id="video", accept="video/*", required)
+        label(for="thumb") Thumbnail File
+        input(type="file", name="thumb", id="thumb", accept="image/*", required)
+        input(type="text", name="title", placeholder="Title", required, minlength="2")
+        input(type="text", name="description", placeholder="Description", required, maxlength="140")
+        input(type="text", name="hashtags", placeholder="Hashtags, seperated by comma", required)
+        input(type="submit", value="Upload Video")

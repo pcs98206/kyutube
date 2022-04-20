@@ -1,0 +1,9 @@
+extends base
+
+block content 
+    h3 Update video
+    form(method="post")
+        input(type="text", name="title", placeholder="Video Title", value=video.title, required)
+        input(type="text", name="description", placeholder="Description", required, maxlength="140", value=video.description)
+        input(type="text", name="hashtags", placeholder="Hashtags, seperated by comma", required, value=video.hashtags.join())
+        input(type="submit", value="Save")
