@@ -41,7 +41,7 @@ export const avatarUpload = multer({
     },
     storage: multerS3({
         s3: s3,
-        bucket: 'kyutubeUpload',    
+        bucket: 'kyutube',    
     })
 });
 
@@ -52,6 +52,6 @@ export const videoUpload = multer({
     },
     storage: multerS3({
         s3: s3,
-        bucket: 'kyutubeUpload',    
+        bucket: 'kyutube',    
     })
 });
