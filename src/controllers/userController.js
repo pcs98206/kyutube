@@ -142,13 +142,14 @@ export const postEdit = async(req, res) => {
     const existUsername = await User.findOne({username});
     if((existUsername != null && existUsername._id != _id) || (existEmail != null && existEmail._id != _id)){
         return res.render("edit-profile", {pageTitle:"Edit Profile", errorMessage: "This email/username is already taken"});
-    }
+    };
+    const isHeroku = process.env.NODE_ENV === "production";
     const updateUser = await User.findByIdAndUpdate(_id, {
         email, 
         username, 
         name, 
         location,
-        avatarUrl : file? file.path : avatarUrl
+        avatarUrl : file? (isHeroku ? file.location : `${file.destination}/${file.filename}`) : avatarUrl
     }, {new:true});
     req.session.user = updateUser;
     return res.redirect("/");
@@ -197,7 +198,6 @@ export const profile = async(req, res) =>{
             model: "User"
         }
     }).populate("comments");
-    console.log(user);
     if(!user){
         return res.status(404).render('404', {pageTitle:"User not found"});
     };
